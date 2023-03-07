@@ -1,25 +1,44 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { getFirestore, collection, getDocs, doc, addDoc } from 'firebase/firestore/lite';
-import db from './src/connection/firebaseConfig'
+import { StyleSheet, Text, View, Button } from "react-native";
+import { Sensor } from "./src/models/SensorModel";
+import {
+  criarSensor,
+  listarSensores,
+} from "./src/controllers/SensorController";
+import { useState, useEffect } from "react";
 
 export default function App() {
+  const [listaSensores, setListaSensores] = useState([]);
+  let sensor = new Sensor(1, "Distância");
 
-  const handleClick = () => {
-    const sensorRef = doc(db, 'sensores', 'sensor1')
+  const addSensor = async (sensor) => {
+    criarSensor(sensor);
+  };
 
-    addDoc(sensorRef, {
-      nome: "sensor de umidade"
-    })
-    .then(res => console.log("deu certo"))
-  
-  }
+  const listSensors = async () => {
+    await listarSensores().then((data) => {
+      setListaSensores({ ...data });
+    });
+  };
+
+  useEffect(() => {
+    listSensors();
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
-      <Button title="click aqui" onClick={handleClick} />
+      <Button title="click aqui" onPress={listSensors} />
+      <View style={styles.lista}>
+        {Object.entries(listaSensores).map((sensor) => {
+          return (
+            <Text key={sensor[1].id}>
+              {sensor[1].nomeSensor["stringValue"]}
+            </Text>
+          );
+        })}
+      </View>
     </View>
   );
 }
@@ -30,5 +49,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  lista: {
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  textoModelo: {
+    fontSize: 18,
+    fontWeight: "500",
   },
 });
