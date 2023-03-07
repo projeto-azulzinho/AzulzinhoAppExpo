@@ -12,7 +12,6 @@ const sensorsCol = collection(db, "Sensores");
 
 export async function criarSensor(sensor) {
   return await addDoc(sensorsCol, {
-    idSensor: sensor.idSensor,
     nomeSensor: sensor.nomeSensor,
   });
 }
@@ -20,7 +19,6 @@ export async function criarSensor(sensor) {
 export async function atualizarSensor(id, sensor) {
   const idSensor = doc(db, "Sensores", `${id}`);
   await updateDoc(idSensor, {
-    idSensor: sensor.idSensor,
     nomeSensor: sensor.nomeSensor,
   });
 }

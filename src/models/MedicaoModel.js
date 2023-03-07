@@ -1,5 +1,4 @@
-function Medicao(idMedicao, dataMedicao, valor, idSensor) {
-  this.idMedicao = idMedicao;
+function Medicao(dataMedicao, valor, idSensor) {
   this.dataMedicao = dataMedicao;
   this.valor = valor;
   this.idSensor = idSensor;

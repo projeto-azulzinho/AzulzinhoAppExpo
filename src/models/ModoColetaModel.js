@@ -1,5 +1,4 @@
-function ModoColeta(idModoColeta, nomeModo, tempo, idConjunto) {
-  this.idModoColeta = idModoColeta;
+function ModoColeta(nomeModo, tempo, idConjunto) {
   this.nomeModo = nomeModo;
   this.tempo = tempo;
   this.idConjunto = idConjunto;

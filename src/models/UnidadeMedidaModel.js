@@ -1,4 +1,3 @@
-function UnidadeMedida(idUnidadeMedida, nomeUnidade) {
-  this.idUnidadeMedida = idUnidadeMedida;
+function UnidadeMedida(nomeUnidade) {
   this.nomeUnidade = nomeUnidade;
 }

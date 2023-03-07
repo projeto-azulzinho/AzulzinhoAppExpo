@@ -1,4 +1,3 @@
-function Conjunto(idConjunto, nomeConjunto) {
-  this.idConjunto = idConjunto;
+function Conjunto(nomeConjunto) {
   this.nomeConjunto = nomeConjunto;
 }

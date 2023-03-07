@@ -1,4 +1,3 @@
-export function Sensor(idSensor, nomeSensor) {
-  this.idSensor = idSensor;
+export function Sensor(nomeSensor) {
   this.nomeSensor = nomeSensor;
 }
