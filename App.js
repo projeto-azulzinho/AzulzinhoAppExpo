@@ -4,16 +4,12 @@ import { Sensor } from "./src/models/SensorModel";
 import {
   criarSensor,
   listarSensores,
-  atualizarSensor,
-  deletarSensor,
 } from "./src/controllers/SensorController";
 import { useState, useEffect } from "react";
 
 export default function App() {
   const [listaSensores, setListaSensores] = useState([]);
   let sensor = new Sensor(1, "Distância");
-  let sensor2 = new Sensor(1, "Luminosidade");
-  let id = "4W3xcAP65icBPCjrizQT";
 
   const addSensor = async () => {
     criarSensor(sensor);
