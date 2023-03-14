@@ -4,15 +4,29 @@ import { Sensor } from "./src/models/SensorModel";
 import {
   criarSensor,
   listarSensores,
+  atualizarSensor,
+  deletarSensor
+
 } from "./src/controllers/SensorController";
 import { useState, useEffect } from "react";
 
 export default function App() {
   const [listaSensores, setListaSensores] = useState([]);
   let sensor = new Sensor(1, "Distância");
+  let sensor2 = new Sensor(1, "Luminosidade");
+  let id = '4W3xcAP65icBPCjrizQT'
 
-  const addSensor = async (sensor) => {
+
+  const addSensor = async () => {
     criarSensor(sensor);
+  };
+
+  const upSensor = async () => {
+    atualizarSensor(id, sensor2);
+  };
+
+  const delSensor = async () => {
+    deletarSensor(id);
   };
 
   const listSensors = async () => {
@@ -30,6 +44,9 @@ export default function App() {
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
       <Button title="click aqui" onPress={listSensors} />
+      <Button title="add sensor" onPress={addSensor} />
+      <Button title="udpdate sensor" onPress={upSensor} />
+      <Button title="delete sensor" onPress={delSensor} />
       <View style={styles.lista}>
         {Object.entries(listaSensores).map((sensor) => {
           return (
