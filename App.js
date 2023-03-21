@@ -1,51 +1,54 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
-import { Sensor } from "./src/models/SensorModel";
+import { Conjunto } from "./src/models/ConjuntoModel";
 import {
-  criarSensor,
-  listarSensores,
-} from "./src/controllers/SensorController";
+  criarConjunto,
+  atualizarConjunto,
+  deletarConjunto,
+  listarConjuntos,
+} from "./src/controllers/ConjuntoController";
 import { useState, useEffect } from "react";
 
 export default function App() {
-  const [listaSensores, setListaSensores] = useState([]);
-  let sensor = new Sensor(1, "Distância");
+  const [listaConjuntos, setListaConjuntos] = useState([]);
+  let conjunto = new Conjunto("predicao de direcao de ventos");
+  let conjunto2 = new Conjunto("predicao do sentido de ventos");
 
-  const addSensor = async () => {
-    criarSensor(sensor);
+  const addConjunto = async () => {
+    criarConjunto(conjunto);
   };
 
-  const upSensor = async () => {
-    atualizarSensor(id, sensor2);
+  const upConjunto = async () => {
+    atualizarConjunto(id, conjunto2);
   };
 
-  const delSensor = async () => {
-    deletarSensor(id);
+  const delConjunto = async () => {
+    deletarConjunto(id);
   };
 
-  const listSensors = async () => {
-    await listarSensores().then((data) => {
+  const listConjuntos = async () => {
+    await listarConjuntos().then((data) => {
       setListaSensores({ ...data });
     });
   };
 
   useEffect(() => {
-    listSensors();
+    listConjuntos();
   }, []);
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
-      <Button title="click aqui" onPress={listSensors} />
-      <Button title="add sensor" onPress={addSensor} />
-      <Button title="udpdate sensor" onPress={upSensor} />
-      <Button title="delete sensor" onPress={delSensor} />
+      <Button title="click aqui" onPress={listConjuntos} />
+      <Button title="add sensor" onPress={addConjunto} />
+      <Button title="udpdate sensor" onPress={upConjunto} />
+      <Button title="delete sensor" onPress={delConjunto} />
       <View style={styles.lista}>
-        {Object.entries(listaSensores).map((sensor) => {
+        {Object.entries(listaConjuntos).map((conjunto) => {
           return (
-            <Text key={sensor[1].id}>
-              {sensor[1].nomeSensor["stringValue"]}
+            <Text key={conjunto[1].id}>
+              {conjunto[1].nomeConjunto["stringValue"]}
             </Text>
           );
         })}
