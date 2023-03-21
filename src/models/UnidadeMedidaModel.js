@@ -1,3 +1,3 @@
-function UnidadeMedida(nomeUnidade) {
+export function UnidadeMedida(nomeUnidade) {
   this.nomeUnidade = nomeUnidade;
 }

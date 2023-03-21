@@ -1,4 +1,4 @@
-function GrandezaSensor(idGrandeza, idSensor) {
+export function GrandezaSensor(idGrandeza, idSensor) {
   this.idGrandeza = idGrandeza;
   this.idSensor = idSensor;
 }
