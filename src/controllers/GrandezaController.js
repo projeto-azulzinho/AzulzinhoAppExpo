@@ -5,21 +5,39 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  getDoc,
 } from "firebase/firestore/lite";
 import db from "../connection/firebaseConfig";
 
-const conjuntosCol = collection(db, "Grandezas");
+const grandezaCol = collection(db, "Grandezas");
 
-export async function criarGrandeza(conjunto) {
-  return await addDoc(conjuntosCol, {
-    nomeGrandeza: conjunto.nomeGrandeza,
+export async function criarGrandeza(grandeza) {
+  const idUnidadeMedidaRef = doc(
+    db,
+    "UnidadeMedidas",
+    `${grandeza.idUnidadeMedida}`
+  );
+  return await addDoc(grandezaCol, {
+    nomeGrandeza: grandeza.nomeGrandeza,
+    idUnidadeMedida: idUnidadeMedidaRef,
   });
 }
 
-export async function atualizarGrandeza(id, conjunto) {
+export async function consultarGrandeza(id) {
+  const idGrandezaRef = doc(db, "Grandezas", `${id}`);
+  return (await getDoc(idGrandezaRef)).data();
+}
+
+export async function atualizarGrandeza(id, grandeza) {
+  const idUnidadeMedidaRef = doc(
+    db,
+    "UnidadeMedidas",
+    `${grandeza.idUnidadeMedida}`
+  );
   const idGrandeza = doc(db, "Grandezas", `${id}`);
   await updateDoc(idGrandeza, {
-    nomeGrandeza: conjunto.nomeGrandeza,
+    nomeGrandeza: grandeza.nomeGrandeza,
+    idUnidadeMedida: idUnidadeMedidaRef,
   });
 }
 
@@ -29,7 +47,7 @@ export async function deletarGrandeza(id) {
 
 export async function listarGrandezas() {
   const resp = [];
-  const querySnapshot = await getDocs(conjuntosCol);
+  const querySnapshot = await getDocs(grandezaCol);
   querySnapshot.docs.forEach((doc) => {
     let objecto = {
       id: doc.id,
