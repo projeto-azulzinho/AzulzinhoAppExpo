@@ -5,20 +5,26 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  getDoc,
 } from "firebase/firestore/lite";
 import db from "../connection/firebaseConfig";
 
-const unidadesMedidaCol = collection(db, "UnidadeMedidas");
+const unidadeMedidasCol = collection(db, "UnidadeMedidas");
 
 export async function criarUnidadeMedida(unidadeMedida) {
-  return await addDoc(unidadesMedidaCol, {
+  return await addDoc(unidadeMedidasCol, {
     nomeUnidade: unidadeMedida.nomeUnidade,
   });
 }
 
+export async function consultarUnidadeMedida(id) {
+  const idUnidadeMedidaRef = doc(db, "UnidadeMedidas", `${id}`);
+  return (await getDoc(idUnidadeMedidaRef)).data();
+}
+
 export async function atualizarUnidadeMedida(id, unidadeMedida) {
-  const idUnidadeMedida = doc(db, "UnidadeMedidas", `${id}`);
-  await updateDoc(idUnidadeMedida, {
+  const idUnidadeMedidaRef = doc(db, "UnidadeMedidas", `${id}`);
+  await updateDoc(idUnidadeMedidaRef, {
     nomeUnidade: unidadeMedida.nomeUnidade,
   });
 }
@@ -29,7 +35,7 @@ export async function deletarUnidadeMedida(id) {
 
 export async function listarUnidadeMedidas() {
   const resp = [];
-  const querySnapshot = await getDocs(unidadesMedidaCol);
+  const querySnapshot = await getDocs(unidadeMedidasCol);
   querySnapshot.docs.forEach((doc) => {
     let objecto = {
       id: doc.id,
