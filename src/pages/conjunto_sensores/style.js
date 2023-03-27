@@ -119,7 +119,7 @@ export default StyleSheet.create({
     
     botao: {
         color: '#000000',
-        paddingLeft: 90,
+        paddingLeft: 50,
         paddingTop: 5   
     },
 

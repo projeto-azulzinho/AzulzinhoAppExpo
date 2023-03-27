@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import cadastro_sensores from '../pages/cadastro_sensores'
+import conjunto_sensores from '../pages/conjunto_sensores'
+import sensores from '../pages/sensores'
 
 const Stack = createNativeStackNavigator();
 

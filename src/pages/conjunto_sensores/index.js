@@ -25,7 +25,7 @@ export default function Cadastro_sensores(){
 
                     <View style = {style.espacamento}></View>
                     <View style = {style.botaoGrandeza}>
-                        <Text title = "teste" style = {style.botao}> Adiciona Conjunto de Sensores </Text>
+                        <Text title = "botaoConjunto" style = {style.botao}> Adiciona Conjunto de Sensores </Text>
                     </View>
 
                     <View style = {style.espacamento}></View>

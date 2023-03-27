@@ -66,7 +66,7 @@ export default StyleSheet.create({
 
     titulo: {
         color: '#FFFFFF',
-        paddingLeft: '30%',
+        paddingLeft: '40%',
         paddingTop: '5%'
     },
 
