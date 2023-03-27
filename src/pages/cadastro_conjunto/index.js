@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Navigation = require('react-native-navigation');
 
 
-export default function Conjunto_sensores(){
+export default function Cadastro_conjunto(){
     return(
         <View>
             
@@ -20,20 +20,34 @@ export default function Conjunto_sensores(){
 
                 <View style = {style.containerTitulo}>
                     <View style = {style.containerTitulo2}>
-                        <Text style = {style.titulo}> Conjunto de Sensores </Text>
+                        <Text style = {style.titulo}> Cadastro de conjunto de sensores </Text>
                     </View>
-
+                    <View style = {style.espacamento}></View>
+                    <Text> Configuração do Conjunto</Text>
+                    <View style = {style.espacamento}></View>
+                    <View style = {style.containerNomeSensor2}>
+                        <TextInput style = {style.NomeSensor}> Nome do conjunto... </TextInput>
+                    </View>
+                    <View style = {style.espacamento3}></View>
+                    <View style = {style.containerNomeSensor2}>
+                        <TextInput style = {style.NomeSensor}> Selecione o modo de coleta de dados </TextInput>
+                    </View>
                     <View style = {style.espacamento}></View>
                     <View style = {style.botaoGrandeza}>
-                        <Text title = "botaoConjunto" style = {style.botao}> Adiciona Conjunto de Sensores </Text>
+                        <Text title = "botaoGrandeza" style = {style.botao}> Adiciona Grandeza </Text>
                     </View>
 
                     <View style = {style.espacamento}></View>
                     <View style = {style.containerNomeSensor}>                      
-                            <Text style = {style.Sensores}> Conjunto 1 </Text>
+                            <Text style = {style.Sensores}> Celsius </Text>
                             <Image style = {style.caixa} source = {require('../../../assets/botao-x.png')}/>             
                     </View>
-                             
+                    <View style = {style.espacamento2}></View>
+                        <LinearGradient style = {style.containerSalvar}
+                         colors={['#184A5B','#5B5A1E']}>
+                            <Text style = {style.botao2}> SALVAR </Text>    
+                        </LinearGradient>          
+                            
                 </View>
                 
                 

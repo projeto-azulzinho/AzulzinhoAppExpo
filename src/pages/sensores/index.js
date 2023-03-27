@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Navigation = require('react-native-navigation');
 
 
-export default function Cadastro_sensores(){
+export default function Sensores(){
     return(
         <View>
             
