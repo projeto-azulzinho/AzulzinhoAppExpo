@@ -9,6 +9,7 @@ export default function Routes(){
             <Stack.Screen
             name =  "Cadastro de sensores"
             component = {cadastro_sensores} 
+            options = {{ headerShown: false }}
             />
 
         </Stack.Navigator>
