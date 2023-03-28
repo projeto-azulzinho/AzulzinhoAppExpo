@@ -40,7 +40,7 @@ export default function Cadastro_sensores(){
                     <View style = {style.espacamento2}></View>
                         <LinearGradient style = {style.containerSalvar}
                          colors={['#184A5B','#5B5A1E']}>
-                            <Text style = {style.botao2}> SALVAR </Text>    
+                            <Text style = {style.botao2}> SALVAR TESTE </Text>    
                         </LinearGradient>          
                             
                 </View>
