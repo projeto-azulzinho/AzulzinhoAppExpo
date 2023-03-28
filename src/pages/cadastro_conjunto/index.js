@@ -32,14 +32,25 @@ export default function Cadastro_conjunto(){
                     <View style = {style.containerNomeSensor2}>
                         <TextInput style = {style.NomeSensor}> Selecione o modo de coleta de dados </TextInput>
                     </View>
+                    <View style = {style.espacamento3}></View>
+                    <View style = {style.containerSegundos}>
+                        <TextInput> 12 </TextInput>
+                        <View style = {style.containerSegundos2}>
+                        <Text style = {style.segundos}> S </Text>
+                        </View>
+                    </View>
+                    <View style = {style.espacamento}></View>
+                    <View style = {style.divisoria}></View>
+                    <View style = {style.espacamento}></View>
+                    <Text> Seleção de Sensores</Text>
                     <View style = {style.espacamento}></View>
                     <View style = {style.botaoGrandeza}>
-                        <Text title = "botaoGrandeza" style = {style.botao}> Adiciona Grandeza </Text>
+                        <Text title = "botaoGrandeza" style = {style.botao}> Adiciona Sensor </Text>
                     </View>
 
                     <View style = {style.espacamento}></View>
                     <View style = {style.containerNomeSensor}>                      
-                            <Text style = {style.Sensores}> Celsius </Text>
+                            <Text style = {style.Sensores}> Sensor 1 </Text>
                             <Image style = {style.caixa} source = {require('../../../assets/botao-x.png')}/>             
                     </View>
                     <View style = {style.espacamento2}></View>

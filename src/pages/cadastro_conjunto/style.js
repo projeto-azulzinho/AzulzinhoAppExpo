@@ -49,7 +49,7 @@ export default StyleSheet.create({
         // borderTopEndRadius: 10,
         // borderBottomStartRadius: 30,
         // borderBottomEndRadius: 30,  
-            paddingTop: '90%'         
+            paddingTop: '10%'         
     },
 
     espacamento3: {
@@ -69,10 +69,23 @@ export default StyleSheet.create({
 
     },
 
+    divisoria: {
+        backgroundColor: '#000000',
+        height: 3
+
+    },
+
     containerTitulo2: {
         backgroundColor: '#013850',
         height: 55, 
         borderRadius: 10
+    }, 
+
+    containerSegundos2: {
+        backgroundColor: '#013850',
+        height: 45, 
+        borderRadius: 5,
+        flex: 1
     }, 
 
     titulo: {
@@ -81,7 +94,11 @@ export default StyleSheet.create({
         paddingTop: '5%'
     },
 
-
+    segundos: {
+        color: '#FFFFFF',
+        paddingLeft: '30%',
+        paddingTop: 12
+    },
 
     NomeSensor: {
         color: '#BFBFBF',
@@ -115,6 +132,18 @@ export default StyleSheet.create({
         height: 45,
         paddingLeft: 7,
         paddingRight: 10, 
+        justifyContent: "space-between",
+        flexDirection: "row",
+    }, 
+
+    containerSegundos: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        borderColor: '#000000',
+        borderWidth: 2,
+        height: 45,
+        width: 80,
+        paddingLeft: 20,
         justifyContent: "space-between",
         flexDirection: "row",
     }, 
