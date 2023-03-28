@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import cadastro_sensores from '../pages/cadastro_sensores'
-import conjunto_sensores from '../pages/conjunto_sensores'
-import sensores from '../pages/sensores'
-import cadastro_conjunto from '../pages/cadastro_conjunto'
+import Cadastro_sensores from '../pages/cadastro_sensores'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +9,7 @@ export default function Routes(){
         <Stack.Navigator>
             <Stack.Screen
             name =  "Cadastro de sensores"
-            component = {cadastro_sensores} 
+            component = {Cadastro_sensores} 
             options = {{ headerShown: false }}
             />
 

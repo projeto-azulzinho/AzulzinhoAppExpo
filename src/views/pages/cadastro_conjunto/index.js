@@ -13,8 +13,8 @@ export default function Cadastro_conjunto(){
              colors={['#063E56','#FFFFFF']}>
 
                 <View style = {style.containerBarra}>
-                   <Image style = {style.caixa} source = {require('../../../assets/balao-de-ar-quente.png')}/>             
-                   <Image style = {style.caixa} source = {require('../../../assets/barra-de-menu.png')}/>             
+                   <Image style = {style.caixa} source = {require('../../../../assets/balao-de-ar-quente.png')}/>             
+                   <Image style = {style.caixa} source = {require('../../../../assets/barra-de-menu.png')}/>             
 
                 </View>
 
@@ -40,7 +40,7 @@ export default function Cadastro_conjunto(){
                     <View style = {style.espacamento}></View>
                     <View style = {style.containerNomeSensor}>                      
                             <Text style = {style.Sensores}> Celsius </Text>
-                            <Image style = {style.caixa} source = {require('../../../assets/botao-x.png')}/>             
+                            <Image style = {style.caixa} source = {require('../../../../assets/botao-x.png')}/>             
                     </View>
                     <View style = {style.espacamento2}></View>
                         <LinearGradient style = {style.containerSalvar}

@@ -70,8 +70,6 @@ export default StyleSheet.create({
         paddingTop: '5%'
     },
 
-
-
     NomeSensor: {
         color: '#BFBFBF',
         paddingLeft: '1%',

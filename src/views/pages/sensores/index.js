@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TextInput, Button,   Image} from "react-native";
 import style from './style';
 import { LinearGradient } from 'expo-linear-gradient';
-const Navigation = require('react-native-navigation');
+
 
 
 export default function Sensores(){
@@ -13,8 +13,8 @@ export default function Sensores(){
              colors={['#063E56','#FFFFFF']}>
 
                 <View style = {style.containerBarra}>
-                   <Image style = {style.caixa} source = {require('../../../assets/balao-de-ar-quente.png')}/>             
-                   <Image style = {style.caixa} source = {require('../../../assets/barra-de-menu.png')}/>             
+                   <Image style = {style.caixa} source = {require('../../../../assets/balao-de-ar-quente.png')}/>             
+                   <Image style = {style.caixa} source = {require('../../../../assets/barra-de-menu.png')}/>             
 
                 </View>
 
@@ -31,7 +31,7 @@ export default function Sensores(){
                     <View style = {style.espacamento}></View>
                     <View style = {style.containerNomeSensor}>                      
                             <Text style = {style.Sensores}> Sensor 1 </Text>
-                            <Image style = {style.caixa} source = {require('../../../assets/botao-x.png')}/>             
+                            <Image style = {style.caixa} source = {require('../../../../assets/botao-x.png')}/>             
                     </View>
                              
                 </View>

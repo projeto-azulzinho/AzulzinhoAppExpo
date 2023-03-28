@@ -13,8 +13,8 @@ export default function Conjunto_sensores(){
              colors={['#063E56','#FFFFFF']}>
 
                 <View style = {style.containerBarra}>
-                   <Image style = {style.caixa} source = {require('../../../assets/balao-de-ar-quente.png')}/>             
-                   <Image style = {style.caixa} source = {require('../../../assets/barra-de-menu.png')}/>             
+                   <Image style = {style.caixa} source = {require('../../../../assets/balao-de-ar-quente.png')}/>             
+                   <Image style = {style.caixa} source = {require('../../../../assets/barra-de-menu.png')}/>             
 
                 </View>
 
@@ -31,7 +31,7 @@ export default function Conjunto_sensores(){
                     <View style = {style.espacamento}></View>
                     <View style = {style.containerNomeSensor}>                      
                             <Text style = {style.Sensores}> Conjunto 1 </Text>
-                            <Image style = {style.caixa} source = {require('../../../assets/botao-x.png')}/>             
+                            <Image style = {style.caixa} source = {require('../../../../assets/botao-x.png')}/>             
                     </View>
                              
                 </View>
