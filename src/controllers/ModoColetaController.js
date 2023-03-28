@@ -5,25 +5,33 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  getDoc,
 } from "firebase/firestore/lite";
 import db from "../connection/firebaseConfig";
 
 const modosColetaCol = collection(db, "ModoColetas");
 
 export async function criarModoColeta(modoColeta) {
+  const idConjuntoRef = doc(db, "Conjuntos", `${modoColeta.idConjunto}`);
   return await addDoc(modosColetaCol, {
     nomeModo: modoColeta.nomeModo,
     tempo: modoColeta.tempo,
-    idConjunto: modoColeta.idConjunto,
+    idConjunto: idConjuntoRef,
   });
 }
 
+export async function consultarModoColeta(id) {
+  const idModoColetaRef = doc(db, "ModoColetas", `${id}`);
+  return (await getDoc(idModoColetaRef)).data();
+}
+
 export async function atualizarModoColeta(id, modoColeta) {
-  const idModoColeta = doc(db, "ModoColetas", `${id}`);
+  const idConjuntoRef = doc(db, "Conjuntos", `${modoColeta.idConjunto}`);
+  const idModoColeta = doc(db, "ModoColetas", id);
   await updateDoc(idModoColeta, {
     nomeModo: modoColeta.nomeModo,
     tempo: modoColeta.tempo,
-    idConjunto: modoColeta.idConjunto,
+    idConjunto: idConjuntoRef,
   });
 }
 
@@ -31,7 +39,7 @@ export async function deletarModoColeta(id) {
   await deleteDoc(doc(db, "ModoColetas", id));
 }
 
-export async function listarModosSensores() {
+export async function listarModoColetas() {
   const resp = [];
   const querySnapshot = await getDocs(modosColetaCol);
   querySnapshot.docs.forEach((doc) => {

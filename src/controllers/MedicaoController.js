@@ -27,7 +27,7 @@ export async function consultarMedicao(id) {
 
 export async function atualizarMedicao(id, medicao) {
   const idSensorRef = doc(db, "Sensores", `${medicao.idSensor}`);
-  const idMedicao = doc(db, "Medicao", `${id}`);
+  const idMedicao = doc(db, "Medicoes", `${id}`);
   await updateDoc(idMedicao, {
     dataMedicao: medicao.dataMedicao,
     valor: medicao.valor,
