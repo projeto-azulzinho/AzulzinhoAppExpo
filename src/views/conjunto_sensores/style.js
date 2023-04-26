@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  caixaDelete: {
+    width: 16,
+    height: 16,
+  },
   container: {
     // width: 25,
     // height: 20,
@@ -57,8 +61,6 @@ export default StyleSheet.create({
   },
 
   containerTitulo2: {
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#013850",
     height: 55,
     borderRadius: 10,
@@ -66,6 +68,8 @@ export default StyleSheet.create({
 
   titulo: {
     color: "#FFFFFF",
+    paddingLeft: "30%",
+    paddingTop: "5%",
   },
 
   NomeSensor: {
@@ -91,12 +95,14 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
 
-  containerInputGrandezas: {
+  containerNomeSensor2: {
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     borderColor: "#000000",
     borderWidth: 2,
     height: 45,
+    paddingLeft: 7,
+    paddingRight: 10,
     justifyContent: "space-between",
     flexDirection: "row",
   },
@@ -112,7 +118,7 @@ export default StyleSheet.create({
 
   botao: {
     color: "#000000",
-    paddingLeft: 90,
+    paddingLeft: 50,
     paddingTop: 5,
   },
 

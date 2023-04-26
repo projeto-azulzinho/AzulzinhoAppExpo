@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { criarGrandeza } from "../../../controllers/GrandezaController";
-import { Grandeza } from "../../../models/GrandezaModel";
+import { criarGrandeza } from "../../controllers/GrandezaController";
+import { Grandeza } from "../../models/GrandezaModel";
 import {
   View,
   Text,
@@ -13,50 +13,33 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native";
-import { listarUnidadeMedidas } from "../../../controllers/UnidadeMedidaController";
+import {
+  criarUnidadeMedida,
+  listarUnidadeMedidas,
+} from "../../controllers/UnidadeMedidaController";
+import imgBalao from "../../assets/balao-de-ar-quente.png";
+import imgMenu from "../../assets/barra-de-menu.png";
+import { UnidadeMedida } from "../../models/UnidadeMedidaModel";
 
-export function CadastroGrandezas() {
-  const [modal, setModal] = useState(false);
-  const [grandeza, setGrandeza] = useState("");
-  const [unidadeMedidaId, setUnidadeMedidaId] = useState("");
-  const [unidadeMedida, setUnidadeMedida] = useState(
-    "Escolha a Unidade de Medida"
-  );
-  const [listaUnidadeMedida, setListaUnidadeMedida] = useState([]);
+export function CadastroUnidadeMedida({ navigation }) {
+  const [unidadeMedida, setUnidadeMedida] = useState("");
 
   const handleaAddGrandeza = async () => {
-    if (grandeza.trim().length == 0) {
-      Alert.alert("Atenção!", "Preencha o campo grandeza", [
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ]);
-    } else if (unidadeMedida == "Escolha a Unidade de Medida") {
-      Alert.alert("Atenção!", "Escolha a unidade de medida", [
+    if (unidadeMedida.trim().length == 0) {
+      Alert.alert("Atenção!", "Preencha o campo unidade de medida", [
         { text: "OK", onPress: () => console.log("OK Pressed") },
       ]);
     } else {
       try {
-        await criarGrandeza(new Grandeza(grandeza, unidadeMedidaId));
+        await criarUnidadeMedida(new UnidadeMedida(unidadeMedida));
         Alert.alert("Sucesso!", "Cadastro realizado com sucesso!", [
           { text: "OK", onPress: () => console.log("OK Pressed") },
         ]);
+        setUnidadeMedida("");
       } catch (error) {
         console.log(error);
       }
     }
-  };
-
-  const listUnidadeMedidas = async () => {
-    setModal(true);
-    const data = await listarUnidadeMedidas();
-    setListaUnidadeMedida(data);
-  };
-
-  const handleItemPress = (item) => {
-    if (item.nomeUnidade["stringValue"].trim().length != 0) {
-      setUnidadeMedida(item.nomeUnidade["stringValue"]);
-      setUnidadeMedidaId(item.id);
-    }
-    setModal(false);
   };
 
   return (
@@ -68,63 +51,22 @@ export function CadastroGrandezas() {
         end={{ x: 0, y: 0.1 }}
       >
         <View style={styles.containerBarra}>
-          <Image
-            style={styles.caixa}
-            source={require("../../../../assets/balao-de-ar-quente.png")}
-          />
-          <Image
-            style={styles.caixa}
-            source={require("../../../../assets/barra-de-menu.png")}
-          />
+          <Image style={styles.caixa} source={imgBalao} />
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Image style={styles.caixa} source={imgMenu} />
+          </TouchableOpacity>
         </View>
         <View style={styles.containerInputs}>
           <View style={styles.containerTitulo2}>
-            <Text style={styles.titulo}> Cadastro de Grandezas </Text>
+            <Text style={styles.titulo}> Cadastro de Unidades de Medida </Text>
           </View>
 
           <TextInput
             style={styles.textInput}
-            onChangeText={setGrandeza}
-            placeholder="Nome da Grandeza..."
-            value={grandeza}
+            onChangeText={setUnidadeMedida}
+            placeholder="Nome da Unidade de Medida..."
+            value={unidadeMedida}
           />
-          <TouchableOpacity onPress={listUnidadeMedidas}>
-            <View style={styles.buttonEscolha}>
-              <Text style={styles.titulo}>{unidadeMedida}</Text>
-            </View>
-          </TouchableOpacity>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modal}
-            onRequestClose={() => setModal(false)}
-          >
-            <View style={styles.backModal}>
-              <LinearGradient
-                style={styles.modalBody}
-                colors={["#FFFFFF", "#063E56"]}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 0, y: 0.1 }}
-              >
-                <Text style={styles.textModal}>Unidades de Medida</Text>
-                <FlatList
-                  data={listaUnidadeMedida}
-                  keyExtractor={(item) => String(item.id)}
-                  renderItem={({ item, index }) => {
-                    return (
-                      <TouchableOpacity onPress={() => handleItemPress(item)}>
-                        <View key={index} style={styles.itemStyle}>
-                          <Text style={styles.textStyle}>
-                            {item.nomeUnidade["stringValue"]}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    );
-                  }}
-                />
-              </LinearGradient>
-            </View>
-          </Modal>
 
           <View style={styles.buttomSavePos}>
             <TouchableOpacity onPress={handleaAddGrandeza}>
@@ -144,13 +86,26 @@ export function CadastroGrandezas() {
   );
 }
 const styles = StyleSheet.create({
+  textUM: {
+    fontWeight: "500",
+  },
+  buttomUM: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+
+    height: 50,
+    width: "70%",
+  },
   textModal: {
     textAlign: "center",
     color: "white",
     fontWeight: "500",
     fontSize: 20,
 
-    margin: 10,
+    marginBottom: 40,
   },
   buttomSavePos: {
     flex: 1,
@@ -160,6 +115,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontWeight: "700",
     fontSize: 20,
+    color: "#fff",
   },
   itemStyle: {
     display: "flex",
@@ -168,18 +124,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
 
-    backgroundColor: "#fff",
     padding: 5,
     marginLeft: 30,
     marginRight: 30,
     marginVertical: 8,
-
-    borderRadius: 5,
-    borderColor: "#013850",
-    borderWidth: 1,
   },
   modalBody: {
-    backgroundColor: "#fff",
     width: "80%",
     height: "50%",
     borderRadius: 30,
@@ -189,7 +139,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "#013850",
   },
   buttonEscolha: {
     backgroundColor: "#013850",
@@ -267,6 +217,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#013850",
     height: 65,
     borderRadius: 10,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0.5,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 20,
+
+    elevation: 3,
   },
 
   titulo: {
