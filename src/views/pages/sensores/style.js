@@ -26,7 +26,8 @@ export default StyleSheet.create({
             paddingLeft: '10%',
             paddingRight: '10%',
             justifyContent: "space-between",
-            flexDirection: "row",      
+            flexDirection: "row",
+            zIndex: 300   
 
     },
 
@@ -70,8 +71,6 @@ export default StyleSheet.create({
         paddingTop: '5%'
     },
 
-
-
     NomeSensor: {
         color: '#BFBFBF',
         paddingLeft: '1%',
@@ -80,7 +79,7 @@ export default StyleSheet.create({
     Sensores: {
         color: '#000000',
         paddingLeft: '1%',
-
+        width: '90%'
     },
 
     containerNomeSensor: {
@@ -94,6 +93,7 @@ export default StyleSheet.create({
         paddingRight: 10, 
         justifyContent: "space-between",
         flexDirection: "row",
+        marginBottom: 8
     }, 
 
     containerNomeSensor2: {
@@ -120,7 +120,7 @@ export default StyleSheet.create({
     botao: {
         color: '#000000',
         paddingLeft: 90,
-        paddingTop: 5   
+        paddingTop: 5,
     },
 
     botao2: {
@@ -138,6 +138,9 @@ export default StyleSheet.create({
 
     }, 
 
-
+    scroll: {
+        height: 450
+    
+    }
 
 });

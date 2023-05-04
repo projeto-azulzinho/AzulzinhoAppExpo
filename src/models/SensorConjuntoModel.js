@@ -1,4 +1,4 @@
-export function SensorConjunto(idSensor, idConjunto) {
+export function SensorConjunto(idConjunto, idSensor) {
   this.idSensor = idSensor;
   this.idConjunto = idConjunto;
 }

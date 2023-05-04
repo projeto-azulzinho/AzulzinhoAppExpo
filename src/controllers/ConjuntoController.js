@@ -5,7 +5,7 @@ import {
   updateDoc,
   doc,
   deleteDoc,
-  getDoc,
+  getDoc
 } from "firebase/firestore/lite";
 import db from "../connection/firebaseConfig";
 
@@ -14,6 +14,8 @@ const conjuntosCol = collection(db, "Conjuntos");
 export async function criarConjunto(conjunto) {
   return await addDoc(conjuntosCol, {
     nomeConjunto: conjunto.nomeConjunto,
+    modoColeta: conjunto.modoColeta,
+    tempoColeta: conjunto.tempoColeta,
   });
 }
 

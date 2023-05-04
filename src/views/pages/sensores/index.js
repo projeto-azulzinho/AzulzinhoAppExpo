@@ -1,22 +1,58 @@
-import React from "react";
-import { View, Text, TextInput, Button,   Image} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TextInput, Button, Image, ScrollView, Pressable} from "react-native";
 import style from './style';
 import { LinearGradient } from 'expo-linear-gradient';
+import { listarSensores, deletarSensor } from "../../../controllers/SensorController";
+import { Menu } from "../../components/menu";
+const Navigation = require('react-native-navigation');
 
 
+export default function Sensores({navigation}){
+    const [listaSensores, setListaSensores] = useState([])
+    const [ loading, setLoading] = useState(true)
+    const [menuAtivo, setMenuAtivo] = useState(false)
 
-export default function Sensores(){
+    const handleCadastrarSensor = () => {
+        navigation.navigate('Cadastro de sensores')
+        console.log("chegou aqui")
+    }
+    const deleteSensor = (id) => {
+        deletarSensor(id)
+        .then(res => console.log(res))
+
+        listarSensores()
+        .then(resp => setListaSensores(resp))
+    }
+
+    const updateSensor = (sensor) => {
+        navigation.navigate('Cadastro de sensores', {sensor: sensor})
+    }
+
+    const abrirFecharMenu = () => {
+        setMenuAtivo(!menuAtivo)
+    }
+
+    useEffect(() => {
+        listarSensores()
+        .then(resp => {
+            setListaSensores(resp)
+            setLoading(false)
+        })
+    }, [])
+
     return(
-        <View>
-            
+        <View>          
             <LinearGradient style = {style.container}
              colors={['#063E56','#FFFFFF']}>
 
                 <View style = {style.containerBarra}>
                    <Image style = {style.caixa} source = {require('../../../../assets/balao-de-ar-quente.png')}/>             
-                   <Image style = {style.caixa} source = {require('../../../../assets/barra-de-menu.png')}/>             
-
+                   <Pressable onPress={abrirFecharMenu}>
+                        <Image style = {style.caixa} source = {require('../../../../assets/barra-de-menu.png')}/>             
+                    </Pressable>
                 </View>
+
+                { menuAtivo ? ( <Menu navegar={navigation}/> ) : "" }
 
                 <View style = {style.containerTitulo}>
                     <View style = {style.containerTitulo2}>
@@ -24,22 +60,32 @@ export default function Sensores(){
                     </View>
 
                     <View style = {style.espacamento}></View>
-                    <View style = {style.botaoGrandeza}>
-                        <Text title = "teste" style = {style.botao}> Adiciona Sensor </Text>
+                    <View style = {style.botaoGrandeza} >
+                        <Text title = "teste" style = {style.botao} onPress={handleCadastrarSensor}> Adiciona Sensor </Text>
                     </View>
 
                     <View style = {style.espacamento}></View>
-                    <View style = {style.containerNomeSensor}>                      
-                            <Text style = {style.Sensores}> Sensor 1 </Text>
-                            <Image style = {style.caixa} source = {require('../../../../assets/botao-x.png')}/>             
-                    </View>
+
+                    <ScrollView style = {style.scroll}>
+                        {    
+                            listaSensores.map((sensor) => {
+                                return (
+                                <View style = {style.containerNomeSensor} key={sensor.id}>                      
+                                    <Text style = {style.Sensores} onPress={() => updateSensor(sensor)}>{sensor.nomeSensor.stringValue}</Text>
+                                    <Pressable onPress={() => deleteSensor(sensor.id)}>
+                                        <Image style = {style.caixa} source = {require('../../../../assets/botao-x.png')}/>             
+                                    </Pressable>
+                                </View>
+                            )})
+                        }
+                    </ScrollView>
                              
                 </View>
                 
                 
 
              </LinearGradient>
-            
+        
         </View>
     );
 }

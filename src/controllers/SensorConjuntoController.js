@@ -5,6 +5,8 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  query,
+  where
 } from "firebase/firestore/lite";
 import db from "../connection/firebaseConfig";
 
@@ -39,5 +41,17 @@ export async function listarSensoresConjunto() {
     };
     resp.push(objecto);
   });
+  return resp;
+}
+
+export async function listarConjuntosID(idConjunto) {
+  const q = query(sensoresConjuntoCol, where("id", "==", `${idConjunto}`))
+
+  const resp = [];
+  onSnapshot(q, (snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      resp.push({...doc.data(), id: doc.id})
+    })
+  })
   return resp;
 }

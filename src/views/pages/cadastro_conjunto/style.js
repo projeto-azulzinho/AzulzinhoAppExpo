@@ -1,154 +1,80 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet } from 'react-native';
+import { scale, moderateScale, verticalScale } from '../../utilits/scaling';
 
 export default StyleSheet.create({
-    container: {
-        // width: 25,
-        // height: 20,
-        // backgroundColor: "#000200",
-        // borderTopStartRadius: 10,
-        // borderTopEndRadius: 10,
-        // borderBottomStartRadius: 30,
-        // borderBottomEndRadius: 30,
-            height: "100%", 
-            width: "100%",            
+    viewSize: {
+        flex: 1
     },
-
-    containerBarra: {
-        // width: 25,
-        // height: 20,
-        // backgroundColor: "#000200",
-        // borderTopStartRadius: 10,
-        // borderTopEndRadius: 10,
-        // borderBottomStartRadius: 30,
-        // borderBottomEndRadius: 30,  
-            paddingTop: '20%',
-            paddingBottom: '10%',
-            paddingLeft: '10%',
-            paddingRight: '10%',
-            justifyContent: "space-between",
-            flexDirection: "row",      
-
-    },
-
-    espacamento: {
-        // width: 25,
-        // height: 20,
-        // backgroundColor: "#000200",
-        // borderTopStartRadius: 10,
-        // borderTopEndRadius: 10,
-        // borderBottomStartRadius: 30,
-        // borderBottomEndRadius: 30,  
-            paddingTop: '10%'         
-    },
-
-    espacamento2: {
-        // width: 25,
-        // height: 20,
-        // backgroundColor: "#000200",
-        // borderTopStartRadius: 10,
-        // borderTopEndRadius: 10,
-        // borderBottomStartRadius: 30,
-        // borderBottomEndRadius: 30,  
-            paddingTop: '90%'         
-    },
-
-    espacamento3: {
-        // width: 25,
-        // height: 20,
-        // backgroundColor: "#000200",
-        // borderTopStartRadius: 10,
-        // borderTopEndRadius: 10,
-        // borderBottomStartRadius: 30,
-        // borderBottomEndRadius: 30,  
-            paddingTop: '3%'         
-    },
-
-    containerTitulo: {
-        paddingLeft: '10%',
-        paddingRight: '10%'
-
-    },
-
-    containerTitulo2: {
-        backgroundColor: '#013850',
-        height: 55, 
-        borderRadius: 10
-    }, 
-
-    titulo: {
-        color: '#FFFFFF',
-        paddingLeft: '18%',
-        paddingTop: '5%'
-    },
-
-
-
-    NomeSensor: {
-        color: '#BFBFBF',
-        paddingLeft: '1%',
-    },
-
-    Sensores: {
-        color: '#000000',
-        paddingLeft: '1%',
-
-    },
-
-    containerNomeSensor: {
-        backgroundColor: '#FFFFFF',
-        borderRadius: 10,
-        borderColor: '#000000',
-        borderWidth: 2,
-        height: 45,
-        paddingTop: 12,
-        paddingLeft: 7,
-        paddingRight: 10, 
-        justifyContent: "space-between",
-        flexDirection: "row",
-    }, 
-
-    containerNomeSensor2: {
-        backgroundColor: '#FFFFFF',
-        borderRadius: 10,
-        borderColor: '#000000',
-        borderWidth: 2,
-        height: 45,
-        paddingLeft: 7,
-        paddingRight: 10, 
-        justifyContent: "space-between",
-        flexDirection: "row",
-    }, 
-
-    botaoGrandeza: {
-        borderRadius: 10,
-        borderColor: '#000000',
-        borderWidth: 3,
-        height: 45,
-        paddingTop: 5,
-        paddingLeft: 10
-    }, 
     
-    botao: {
-        color: '#000000',
-        paddingLeft: 90,
-        paddingTop: 5   
+    container: {
+        flex: 1,
+        paddingHorizontal: moderateScale(32),
+        paddingTop: moderateScale(24),
+        paddingBottom: moderateScale(32),
     },
 
-    botao2: {
-        color: '#FFFFFF',
-        paddingLeft: 130,
-        paddingTop: 2   
+    scrollSelecionado: {
+        marginBottom: moderateScale(24),
     },
 
-    containerSalvar: {
-        borderRadius: 10,
-        height: 45,
-        paddingLeft: 7,
-        paddingRight: 10, 
-        paddingTop: 8
 
-    }, 
+    btnModoColeta: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: moderateScale(10),
+        borderColor: '#000000',
+        borderWidth: moderateScale(2),
+        paddingVertical: moderateScale(10),
+        paddingHorizontal: moderateScale(16),
+        width: "100%",
+        marginBottom: moderateScale(8)
+    },
 
+    nomeColeta: {
+        color: "black",
+        fontSize: moderateScale(14)
+    },
+
+    seta: {
+        height: moderateScale(15),
+        width: moderateScale(15)
+    },
+
+    line: {
+        borderBottomColor: '#000',
+        borderBottomWidth: moderateScale(1),
+        marginBottom: moderateScale(24),
+        marginTop: moderateScale(16)
+
+    },
+
+    tempoContainer: {
+        flexDirection: 'row',
+        marginBottom: moderateScale(8)
+    },
+
+    tempo: {
+        backgroundColor: "#ffff",
+        borderRadius: moderateScale(10),
+        paddingVertical: moderateScale(8),
+        paddingHorizontal: moderateScale(16),
+        borderColor: '#000000',
+        borderWidth: moderateScale(2),
+        width: "20%"
+    },
+
+    unidadeTempo: {
+        backgroundColor: '#013850',
+        paddingHorizontal: moderateScale(8),
+        justifyContent: 'center',
+        borderRadius: moderateScale(10),
+        marginLeft: moderateScale(-15)
+    },
+
+    textoUnidadeTempo: {
+        fontSize: moderateScale(16),
+        color: "#fff"
+    }
 
 
 });
