@@ -1,88 +1,71 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, Image, ScrollView, Pressable} from "react-native";
+import React, { useEffect, useState} from "react";
+import { View, ScrollView, StatusBar, Text} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import style from './style';
 import { LinearGradient } from 'expo-linear-gradient';
-import { listarSensores, deletarSensor } from "../../../controllers/SensorController";
 import { Menu } from "../../components/menu";
-const Navigation = require('react-native-navigation');
+import { Titulo } from "../../components/titulo";
+import { BotaoAdicionar } from "../../components/botaoAdicionar";
+import { Cabecario } from "../../components/cabecario";
+import { ItemInformativo } from "../../components/itemInformativo";
+import { toggleMenu } from "../../../redux/menu";
+import { listarSensores, deletarSensor } from "../../../controllers/SensorController";
+import { deletarSensorDeConjunto } from "../../../controllers/SensorConjuntoController";
 
+export default function Conjunto_sensores({navigation}){
 
-export default function Sensores({navigation}){
     const [listaSensores, setListaSensores] = useState([])
-    const [ loading, setLoading] = useState(true)
-    const [menuAtivo, setMenuAtivo] = useState(false)
-
-    const handleCadastrarSensor = () => {
-        navigation.navigate('Cadastro de sensores')
-        console.log("chegou aqui")
-    }
-    const deleteSensor = (id) => {
-        deletarSensor(id)
-        .then(res => console.log(res))
-
-        listarSensores()
-        .then(resp => setListaSensores(resp))
-    }
-
-    const updateSensor = (sensor) => {
-        navigation.navigate('Cadastro de sensores', {sensor: sensor})
-    }
+    const {menuAtivo} = useSelector((state) => state.menuAtivo)
+    const dispatch = useDispatch()
 
     const abrirFecharMenu = () => {
-        setMenuAtivo(!menuAtivo)
+        dispatch(toggleMenu())
     }
 
-    useEffect(() => {
+    const removeSensor = (sensor, index) => {
+        deletarSensorDeConjunto(sensor.id)
+        deletarSensor(sensor.id)
+        const novaLista = listaSensores
+        novaLista.splice(index, 1)
+        setListaSensores([...novaLista])
+    }
+
+    const editarSensor = () => {
+        navigation.navigate("Cadastro de sensores")
+    }
+
+    useEffect(() =>{
         listarSensores()
-        .then(resp => {
-            setListaSensores(resp)
-            setLoading(false)
-        })
+        .then(res => setListaSensores(res))
     }, [])
-
+    
     return(
-        <View>          
+        <View style={style.viewSize}>
+
             <LinearGradient style = {style.container}
-             colors={['#063E56','#FFFFFF']}>
+                colors={['#063E56','#FFFFFF']} > 
+                
+                <StatusBar   
+                    backgroundColor = "#063E56"
+                    barStyle={"light-content"}
+                /> 
 
-                <View style = {style.containerBarra}>
-                   <Image style = {style.caixa} source = {require('../../../../assets/balao-de-ar-quente.png')}/>             
-                   <Pressable onPress={abrirFecharMenu}>
-                        <Image style = {style.caixa} source = {require('../../../../assets/barra-de-menu.png')}/>             
-                    </Pressable>
-                </View>
-
+                <Cabecario abrirFecharMenu={abrirFecharMenu}/>
+                
                 { menuAtivo ? ( <Menu navegar={navigation}/> ) : "" }
-
-                <View style = {style.containerTitulo}>
-                    <View style = {style.containerTitulo2}>
-                        <Text style = {style.titulo}> Sensores </Text>
-                    </View>
-
-                    <View style = {style.espacamento}></View>
-                    <View style = {style.botaoGrandeza} >
-                        <Text title = "teste" style = {style.botao} onPress={handleCadastrarSensor}> Adiciona Sensor </Text>
-                    </View>
-
-                    <View style = {style.espacamento}></View>
-
-                    <ScrollView style = {style.scroll}>
-                        {    
-                            listaSensores.map((sensor) => {
-                                return (
-                                <View style = {style.containerNomeSensor} key={sensor.id}>                      
-                                    <Text style = {style.Sensores} onPress={() => updateSensor(sensor)}>{sensor.nomeSensor.stringValue}</Text>
-                                    <Pressable onPress={() => deleteSensor(sensor.id)}>
-                                        <Image style = {style.caixa} source = {require('../../../../assets/botao-x.png')}/>             
-                                    </Pressable>
-                                </View>
-                            )})
-                        }
-                    </ScrollView>
-                             
-                </View>
                 
-                
+                <Titulo titulo={"SENSORES"}/>
+ 
+                <BotaoAdicionar adicionarItem={() => navigation.navigate("Cadastro de sensores")} nomeBotao={"ADICIONAR SENSOR"}/>
+                    
+                <ScrollView style={style.scrollSelecionado}>
+                {
+                    listaSensores.map((sensor, index) => {
+                        return (
+                        <ItemInformativo item={sensor} itemNome={"nomeSensor"} index={index} removeItem={removeSensor} editarItem={editarSensor}/>
+                    )})
+                }
+                </ScrollView>
 
              </LinearGradient>
         

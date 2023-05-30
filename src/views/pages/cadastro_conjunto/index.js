@@ -34,6 +34,20 @@ export default function Cadastro_conjunto({navigation}){
     const {menuAtivo} = useSelector((state) => state.menuAtivo)
     const dispatch = useDispatch()
 
+    const clear = () => {
+        setSensoresSelecionados([])
+        setAtivo(false)
+        setListaSensores([])
+        setModoColeta()
+        setNomeConjunto("")
+        setTempoColeta()
+
+        listarSensores()
+        .then(resp => {
+            setListaSensores(resp)
+        })
+    }
+
     const apresentaSensores = () => {
         setAtivo(true)
     }
@@ -67,17 +81,7 @@ export default function Cadastro_conjunto({navigation}){
     }
 
     useEffect(() =>{
-        listarSensores()
-        .then(resp => {
-            setListaSensores(resp)
-        })
-
-        setSensoresSelecionados([])
-        setAtivo(false)
-        setListaSensores([])
-        setModoColeta()
-        setNomeConjunto("")
-        setTempoColeta()
+        clear()
     }, [])
     
     return(
@@ -150,7 +154,8 @@ export default function Cadastro_conjunto({navigation}){
                         
 
                 < BotaoSalvar funcao1={criarConjunto} dados1={[nomeConjunto, modoColeta, tempoColeta]} Modal1={Conjunto}
-                              funcao2={criarSensorConjunto} dados2={sensoresSelecionados} Modal2={SensorConjunto}/>      
+                              funcao2={criarSensorConjunto} dados2={sensoresSelecionados} Modal2={SensorConjunto}
+                              clear={clear} />      
             
                 < BotaoCancelar telaAnterior={telaAnterior} />
 

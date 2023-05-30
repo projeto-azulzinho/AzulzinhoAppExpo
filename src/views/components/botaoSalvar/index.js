@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export const BotaoSalvar = props => {
     
-    const { funcao1, dados1, Modal1, funcao2, dados2, Modal2 } = props
+    const { funcao1, dados1, Modal1, funcao2, dados2, Modal2, clear } = props
 
     const inserirDados = async () => {
         if(funcao2 != undefined){
@@ -19,6 +19,8 @@ export const BotaoSalvar = props => {
         } else {
             salvarDados()
         }
+
+        clear()
     }
     
 

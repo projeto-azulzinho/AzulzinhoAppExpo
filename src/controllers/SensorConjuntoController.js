@@ -9,6 +9,7 @@ import {
   where
 } from "firebase/firestore/lite";
 import db from "../connection/firebaseConfig";
+import { deletarConjunto } from "./ConjuntoController";
 
 const sensoresConjuntoCol = collection(db, "SensoreConjuntos");
 
@@ -44,14 +45,32 @@ export async function listarSensoresConjunto() {
   return resp;
 }
 
-export async function listarConjuntosID(idConjunto) {
-  const q = query(sensoresConjuntoCol, where("id", "==", `${idConjunto}`))
+export async function deletarSensoresConjunto(conjuntoId) {
+  const listaSensoresConjunto = await listarSensoresConjunto()
+  listaSensoresConjunto.forEach( (conjuntoSensor) => {
+      if(conjuntoSensor.idConjunto.stringValue == conjuntoId)
+        deletarSensorConjunto(conjuntoSensor.id)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+})
+}
 
-  const resp = [];
-  onSnapshot(q, (snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      resp.push({...doc.data(), id: doc.id})
+export async function deletarSensorDeConjunto(sensorId) {
+  const listaSensoresConjunto = await listarSensoresConjunto()
+  
+  listaSensoresConjunto.forEach( (conjuntoSensor) => { 
+    conjuntoSensor.idSensor.arrayValue.values.forEach(idSensor => {
+      if(idSensor.stringValue == sensorId) {
+        deletarSensorConjunto(conjuntoSensor.id)
+        .then(res => console.log(res)
+        .catch(err => console.log(err)))
+        
+        deletarConjunto(conjuntoSensor.idConjunto.stringValue)
+        .then(res => console.log(res)
+        .catch(err => console.log(err)))
+      }
     })
+
+    
   })
-  return resp;
 }
