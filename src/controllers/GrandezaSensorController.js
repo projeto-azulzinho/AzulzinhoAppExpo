@@ -11,9 +11,15 @@ import db from "../connection/firebaseConfig";
 const grandezaSensorCol = collection(db, "GrandezaSensores");
 
 export async function criarGrandezaSensor(grandezaSensor) {
+  const listGrandezasId = [];
+  grandezaSensor.idGrandeza.forEach((grandezaId) => {
+    const idGrandezaRef = doc(db, "Grandezas", `${grandezaId.id}`);
+    listGrandezasId.push(idGrandezaRef);
+  });
+  const idSensorRef = doc(db, "Sensores", grandezaSensor.idSensor);
   return await addDoc(grandezaSensorCol, {
-    idGrandeza: grandezaSensor.idGrandeza,
-    idSensor: grandezaSensor.idSensor,
+    idGrandeza: listGrandezasId,
+    idSensor: idSensorRef,
   });
 }
 

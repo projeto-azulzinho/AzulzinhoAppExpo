@@ -12,14 +12,23 @@ import db from "../connection/firebaseConfig";
 const grandezaCol = collection(db, "Grandezas");
 
 export async function criarGrandeza(grandeza) {
-  const idUnidadeMedidaRef = doc(
+  const listUnidadesMedidasId = [];
+  grandeza.idUnidadeMedida.forEach((unidadeMedidaId) => {
+    const idUnidadeMedidaRef = doc(
+      db,
+      "UnidadeMedidas",
+      `${unidadeMedidaId.id}`
+    );
+    listUnidadesMedidasId.push(idUnidadeMedidaRef);
+  });
+  /*   const idUnidadeMedidaRef = doc(
     db,
     "UnidadeMedidas",
     `${grandeza.idUnidadeMedida}`
-  );
+  ); */
   return await addDoc(grandezaCol, {
     nomeGrandeza: grandeza.nomeGrandeza,
-    idUnidadeMedida: idUnidadeMedidaRef,
+    idUnidadeMedida: listUnidadesMedidasId,
   });
 }
 
