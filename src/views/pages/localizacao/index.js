@@ -31,9 +31,27 @@ export default function Conjunto_sensores({navigation}) {
     dispatch(toggleMenu());
   }
 
-  useEffect(() => {
+  // useEffect(async () => {
+    
+  //     await fetch('http://192.168.1.10:3000/leitura').then(res => console.log(res._bodyBlob))
+      
+    
+  //   //console.log(fetch('http://192.168.1.10:3000/'));
+  // }, []);
 
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch('http://192.168.1.10:3000/leitura');
+  //       const text = await response.text();
+  //       console.log(text);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     Animated.loop(

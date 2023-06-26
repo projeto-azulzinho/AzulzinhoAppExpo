@@ -37,6 +37,7 @@ export default function Conjunto_sensores({navigation}){
     useEffect(() =>{
         listarConjuntos()
         .then(res => setListaCojuntos(res))
+        
     }, [])
     
     return(

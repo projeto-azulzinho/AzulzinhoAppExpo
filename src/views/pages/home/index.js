@@ -21,11 +21,17 @@ import SelectDropdown from 'react-native-select-dropdown';
 export default function Home({navigation}){
 
     const [listaConjuntos, setListaCojuntos] = useState([])
+    const [resultadoColeta, setResultadoColeta] = useState([])
     const {menuAtivo} = useSelector((state) => state.menuAtivo)
     const dispatch = useDispatch()
 
     const abrirFecharMenu = () => {
         dispatch(toggleMenu())
+    }
+
+    const resultadoSensores = (valores) => {
+        setResultadoColeta(valores)
+        console.log(resultadoColeta)
     }
 
     const removeConjunto = (conjunto, index) => {
@@ -41,6 +47,17 @@ export default function Home({navigation}){
     }
 
     useEffect(() =>{
+    //     async function fetchData() {
+    //     try {
+    //       const response = await fetch('http://192.168.1.10:3000/leitura');
+    //       const text = await response.text();
+    //       setResultadoColeta(text);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   }
+
+    //   fetchData();
         listarConjuntos()
         .then(res => {
             const listaNomeConjunto = res.map(conjunto => conjunto.nomeConjunto.stringValue)
@@ -88,9 +105,9 @@ export default function Home({navigation}){
                 />
 
                 <CabecarioTabela />
-                <Tabela />
-                <BotaoColetar />
-                <BotaoPararColeta />
+                <Tabela resultado={resultadoColeta}/>
+                <BotaoColetar funcao={resultadoSensores}/>
+                {/* <BotaoPararColeta /> */}
                 
              </LinearGradient>
         

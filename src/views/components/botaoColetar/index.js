@@ -5,12 +5,21 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export const BotaoColetar = props => {
     
-    // const {  } = props
+    const {funcao} = props
 
     const iniciarColeta = async () => {
-        console.log("coleta iniciada")
+        async function fetchData() {
+            try {
+              const response = await fetch('http://192.168.1.10:3000/leitura');
+              const text = await response.text();
+              funcao(text);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          fetchData();
     }
-    
+
 
     return (
         <Pressable onPress={iniciarColeta}>
