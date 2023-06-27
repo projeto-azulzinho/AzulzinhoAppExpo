@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet } from 'react-native';
-import { scale, moderateScale, verticalScale } from '../../utilits/scaling';
+import { scale, moderateScale, verticalScale } from '../../utils/scaling';
 
 export default StyleSheet.create({
     viewSize: {

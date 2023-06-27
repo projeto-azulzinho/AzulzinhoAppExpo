@@ -8,12 +8,13 @@ import { CadastroGrandezas } from "../pages/CadastroGrandeza";
 import { Grandezas } from "../pages/Grandezas";
 import { UnidadesMedida } from "../pages/UnidadesMedida";
 import { CadastroUnidadeMedida } from "../pages/CadastroUnidadeMedida";
+import Localizacao from '../pages/localizacao';
 
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
   return (
-    <Stack.Navigator initialRouteName="Cadastro Grandezas">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
         component={Home}
@@ -58,6 +59,12 @@ export default function Routes() {
         name="Unidades Medida"
         component={UnidadesMedida}
         options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+          name =  "Localização"
+          component = {Localizacao} 
+          options = {{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -7,6 +7,7 @@ import { toggleMenu } from "../../redux/menu";
 
 export const Menu = (props) => {
   const telas = [
+    { key: "Home", pag: "Home" },
     { key: "Conjunto Sensores", pag: "Conjunto sensores" },
     { key: "Sensores", pag: "Sensores" },
     { key: "Grandezas", pag: "Grandezas" },
@@ -18,6 +19,7 @@ export const Menu = (props) => {
     { key: "Cadastro de Sensores", pag: "Cadastro de sensores" },
     { key: "Cadastro de Grandezas", pag: "Cadastro Grandezas" },
     { key: "Cadastro de Unidades de Medida", pag: "Cadastro Unidades Medida" },
+    { key:"Localização", pag: "Localização" }
   ];
 
   const dispatch = useDispatch();

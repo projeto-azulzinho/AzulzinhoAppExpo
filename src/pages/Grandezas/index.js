@@ -75,7 +75,7 @@ export function Grandezas({ route, navigation }) {
 
   useEffect(() => {
     listarGrandezas().then((res) => setListaGrandezas(res));
-  }, []);
+  }, [toggleMenu]);
 
   return (
     <View style={styles.viewSize}>

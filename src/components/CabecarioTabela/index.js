@@ -4,7 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import style from "./style";
 
 export const CabecarioTabela = (props) => {
-  const colunas = ["Nome", "Valor", "Grandeza"];
+  const colunas = ["Nome", "Valor"];
 
   return (
     <View style={style.cabecarioContainer}>

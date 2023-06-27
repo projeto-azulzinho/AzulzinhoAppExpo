@@ -41,7 +41,7 @@ export default function Sensores({ navigation }) {
 
   useEffect(() => {
     listarSensores().then((res) => setListaSensores(res));
-  }, []);
+  }, [toggleMenu]);
 
   return (
     <View style={style.viewSize}>

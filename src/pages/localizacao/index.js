@@ -3,14 +3,14 @@ import { View, ScrollView, StatusBar, Text, StyleSheet, Animated } from "react-n
 import { useSelector, useDispatch } from "react-redux";
 import style from './style';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Menu } from "../../components/menu";
-import { Titulo } from "../../components/titulo";
-import { BotaoAdicionar } from "../../components/botaoAdicionar";
-import { Cabecario } from "../../components/cabecario";
-import { ItemInformativo } from "../../components/itemInformativo";
-import { toggleMenu } from "../../../redux/menu";
-import { listarSensores, deletarSensor } from "../../../controllers/SensorController";
-import { deletarSensorDeConjunto } from "../../../controllers/SensorConjuntoController";
+import { Menu } from "../../components/Menu";
+import { Titulo } from "../../components/Titulo";
+import { BotaoAdicionar } from "../../components/BotaoAdicionar";
+import { Cabecario } from "../../components/Cabecario";
+import { ItemInformativo } from "../../components/ItemInformativo";
+import { toggleMenu } from "../../redux/menu";
+import { listarSensores, deletarSensor } from "../../controllers/SensorController";
+import { deletarSensorDeConjunto } from "../../controllers/SensorConjuntoController";
 import MapView, { Marker, Polyline } from 'react-native-maps';
 
 export default function Conjunto_sensores({navigation}) {
@@ -97,7 +97,7 @@ export default function Conjunto_sensores({navigation}) {
           />
           <Marker.Animated
             coordinate={{ latitude, longitude }}
-            image={require('../../../../assets/balao2.png')} // Altere o caminho para a sua imagem
+            image={require('../../../src/assets/balao2.png')} // Altere o caminho para a sua imagem
             style={{
               transform: [{ scale: markerAnimation }],
             }}

@@ -73,4 +73,19 @@ export async function deletarSensorDeConjunto(sensorId) {
 
     
   })
+
+}
+
+export async function getSensorDeConjunto(conjuntoNomeId) {
+  const listaSensoresConjunto = await listarSensoresConjunto()
+  // console.log(listaSensoresConjunto)
+  let res = []
+  listaSensoresConjunto.forEach( (conjuntoSensor) => { 
+    if(conjuntoSensor.idConjunto.stringValue == conjuntoNomeId) {
+      res = conjuntoSensor.idSensor.arrayValue.values.map(sensorId => sensorId.stringValue)
+    }
+  })
+
+  return res
+      
 }

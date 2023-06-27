@@ -39,3 +39,13 @@ export async function listarSensores() {
   });
   return resp;
 }
+
+export async function getSensor(sensorId) {
+  const listaSensores = await listarSensores()
+  let sensorFinal = null
+  listaSensores.forEach((sensor) => {
+    if(sensor.id == sensorId)
+      sensorFinal = sensor
+  })
+  return sensorFinal;
+}
