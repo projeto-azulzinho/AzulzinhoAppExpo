@@ -14,20 +14,26 @@ import {
   listarConjuntos,
   deletarConjunto,
 } from "../../controllers/ConjuntoController";
-import { deletarSensoresConjunto } from "../../controllers/SensorConjuntoController";
+import {
+  deletarSensoresConjunto,
+  getSensorDeConjunto,
+} from "../../controllers/SensorConjuntoController";
 import { CabecarioTabela } from "../../components/CabecarioTabela";
 import { Tabela } from "../../components/Tabela";
 import { BotaoColetar } from "../../components/BotaoColetar";
 import { BotaoPararColeta } from "../../components/BotaoPararColeta";
 import SelectDropdown from "react-native-select-dropdown";
+import { getSensor, listarSensores } from "../../controllers/SensorController";
 
 export default function Home({ navigation }) {
+  const [listSensores, setListSensores] = useState([]);
   const [conjuntoSelecionado, setConjuntoselecionado] = useState();
   const [updateListaConjunto, setUpdateListaConjunto] = useState(false);
   const [listaNomeConjuntos, setListaNomeCojuntos] = useState([]);
   const [listaConjuntos, setListaCojuntos] = useState([]);
   const [resultadoColeta, setResultadoColeta] = useState([]);
   const [getData, setGetData] = useState(false);
+  const [result, setResult] = useState([]);
   const { menuAtivo } = useSelector((state) => state.menuAtivo);
   const dispatch = useDispatch();
 
@@ -44,8 +50,20 @@ export default function Home({ navigation }) {
   };
 
   const resultadoSensores = (valores) => {
-    setResultadoColeta(valores);
+    //VOLTAR AQUIII!!!!
+    //setResultadoColeta(valores);
+    setResultadoColeta(
+      "Sensor_Chuva|1024|Humidade|59.00|Temperatura|26.00|Pressão|97883.00|Altitude|290.85|TemperaturaBMP|29.20"
+    );
     console.log(resultadoColeta);
+    const resp = setSensores(resultadoColeta);
+    resp.map((dado, index) => {
+      console.log(dado, index);
+    });
+    const dado = {};
+    setListSensores(setSensores());
+    //const listSensores = setSensores(resultadoColeta);
+    //console.log(listSensores);
   };
 
   const removeConjunto = (conjunto, index) => {
@@ -60,6 +78,54 @@ export default function Home({ navigation }) {
     navigation.navigate("Cadastro conjunto de sensores");
   };
 
+  async function setSensores() {
+    setResultadoColeta(
+      "Sensor_Chuva|1024|Humidade|59.00|Temperatura|26.00|Pressão|97883.00|Altitude|290.85|TemperaturaBMP|29.20"
+    );
+    if (resultadoColeta.length != 0) {
+      let resultado_final = resultadoColeta.split("|");
+      let ress = [];
+      const respListaSensores = await listarSensores();
+      const respSensoresConjuntos = await getSensorDeConjunto(
+        conjuntoSelecionado.id
+      );
+      respSensoresConjuntos.forEach((sensoresId) => {
+        const found = respListaSensores.find(
+          (element) => element.id === sensoresId
+        );
+        index = resultado_final.indexOf(found.nomeSensor.stringValue);
+        if (index !== -1) {
+          ress.push(resultado_final.splice(index, 2));
+          setResult(...result, ress);
+        }
+      });
+      setListSensores(ress);
+    }
+  }
+  /* const setSensores = (resultado) => {
+    if (resultado.length != 0) {
+      
+
+      let ress = [];
+      //console.log(resultado);
+      getSensorDeConjunto(conjuntoSelecionado.id).then((sensores) => {
+        console.log(sensores);
+        sensores.forEach((sensorId) => {
+          getSensor(sensorId).then((sensor) => {
+            index = resultado_final.indexOf(sensor.nomeSensor.stringValue);
+            if (index !== -1) {
+              ress.push(resultado_final.splice(index, 2));
+              setResult(...result, ress);
+            }
+          });
+        });
+      });
+      //console.log(ress);
+      return ress;
+    }
+  }; */
+
+  //console.log(conjuntoSelecionado);
   useEffect(() => {
     //     async function fetchData() {
     //     try {
@@ -97,7 +163,7 @@ export default function Home({ navigation }) {
           data={listaNomeConjuntos}
           onSelect={(selectedItem, index) => {
             setConjuntoselecionado(listaConjuntos[index]);
-            console.log(conjuntoSelecionado);
+            //console.log(conjuntoSelecionado);
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             return selectedItem;
@@ -122,13 +188,8 @@ export default function Home({ navigation }) {
         />
 
         <CabecarioTabela />
-        <Tabela
-          resultado={resultadoColeta}
-          conjunto={conjuntoSelecionado}
-          getData={getData}
-          getDataFalse={getDataFalse}
-        />
-        <BotaoColetar funcao={resultadoSensores} getDataTrue={getDataTrue} />
+        <Tabela dadosProntos={listSensores} />
+        <BotaoColetar funcao={setSensores} />
         {/* <BotaoPararColeta /> */}
       </LinearGradient>
     </View>

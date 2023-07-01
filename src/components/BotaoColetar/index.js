@@ -4,9 +4,9 @@ import style from "./style";
 import { LinearGradient } from "expo-linear-gradient";
 
 export const BotaoColetar = (props) => {
-  const { funcao, getDataTrue } = props;
+  const { funcao } = props;
 
-  const iniciarColeta = async () => {
+  /* const iniciarColeta = async () => {
     async function fetchData() {
       try {
         const response = await fetch("http://192.168.1.104:3000/leitura");
@@ -17,12 +17,10 @@ export const BotaoColetar = (props) => {
       }
     }
     fetchData();
-
-    getDataTrue();
-  };
+  }; */
 
   return (
-    <Pressable onPress={iniciarColeta}>
+    <Pressable onPress={funcao}>
       <LinearGradient
         style={style.btnShape}
         colors={["#184A5B", "#5B5A1E"]}

@@ -21,11 +21,6 @@ export async function criarGrandeza(grandeza) {
     );
     listUnidadesMedidasId.push(idUnidadeMedidaRef);
   });
-  /*   const idUnidadeMedidaRef = doc(
-    db,
-    "UnidadeMedidas",
-    `${grandeza.idUnidadeMedida}`
-  ); */
   return await addDoc(grandezaCol, {
     nomeGrandeza: grandeza.nomeGrandeza,
     idUnidadeMedida: listUnidadesMedidasId,

@@ -4,14 +4,16 @@ import style from "./style";
 import { FlatList } from "react-native-gesture-handler";
 import { getSensorDeConjunto } from "../../controllers/SensorConjuntoController";
 import { getSensor } from "../../controllers/SensorController";
+import { useEffect } from "react";
 
 export const Tabela = (props) => {
   const [result, setResult] = useState([]);
-  const { resultado, conjunto } = props;
-  const [count, setCount] = useState(0);
-  console.log(resultado);
+  //const { resultado, conjunto } = props;
+  const { dadosProntos } = props;
+  //const [count, setCount] = useState(0);
+  //console.log(resultado);
 
-  if (resultado.length != 0) {
+  /* if (resultado.length != 0) {
     let resultado_final = resultado.split("|");
 
     let ress = [];
@@ -37,16 +39,32 @@ export const Tabela = (props) => {
     const dado = {
       valores: result,
     };
-    const info = [dado];
+    const info = [dado]; */
 
+  useEffect(() => {
+    if (dadosProntos.length >= 1) {
+      dadosFormatados = [];
+      dadosProntos.forEach((element) => {
+        const dado = {
+          NomeSensor: element[0],
+          ValorSensor: element[1],
+        };
+        dadosFormatados.push(dado);
+      });
+      setResult(dadosFormatados);
+      console.log(result);
+    }
+  }, []);
+
+  if (dadosProntos != undefined) {
     return (
       <FlatList
-        data={info}
+        data={result}
         renderItem={({ item, index }) => {
           return (
             <View style={style.conjuntoDados}>
-              {item.valores.map((valor, index) => {
-                // console.log(valor)
+              {item.map((valor, index) => {
+                console.log(valor);
                 return (
                   <View style={style.dado}>
                     <Text style={style.value}>{valor[0]}</Text>
@@ -64,5 +82,7 @@ export const Tabela = (props) => {
         contentContainerStyle={style.contentLista}
       />
     );
+  } else {
+    return <></>;
   }
 };
