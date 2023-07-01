@@ -23,7 +23,9 @@ export default function Home({ navigation }) {
   const [listaNomeConjuntos, setListaNomeCojuntos] = useState([]);
   const [listaConjuntos, setListaCojuntos] = useState([]);
   const [resultadoColeta, setResultadoColeta] = useState([]);
+  const [getData, setGetData] = useState(false)
   const { menuAtivo } = useSelector((state) => state.menuAtivo);
+  const [result, setResult] = useState([]);
   const dispatch = useDispatch();
 
   const abrirFecharMenu = () => {
@@ -44,6 +46,14 @@ export default function Home({ navigation }) {
     novaLista.splice(index, 1);
     setListaCojuntos([...novaLista]);
   };
+
+  const getDataTrue = () => {
+    setGetData(true)
+  }
+
+  const getDataFalse = () => {
+    setGetData(false)
+  }
 
   const editarCojunto = () => {
     navigation.navigate("Cadastro conjunto de sensores");
@@ -96,8 +106,16 @@ export default function Home({ navigation }) {
         />
 
         <CabecarioTabela />
-        <Tabela resultado={dadosColetados} conjunto={conjuntoSelecionado} />
-        <BotaoColetar funcao={resultadoSensores} />
+        <Tabela 
+          resultado={dadosColetados} 
+          conjunto={conjuntoSelecionado} 
+          getData={getData} 
+          getDataFalse={getDataFalse}
+          setResult={setResult}
+          result={result}
+        />
+
+        <BotaoColetar funcao={resultadoSensores} getDataTrue={getDataTrue} result={result}/>
         {/* <BotaoPararColeta /> */}
       </LinearGradient>
     </View>

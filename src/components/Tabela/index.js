@@ -4,12 +4,9 @@ import style from "./style";
 import { FlatList } from "react-native-gesture-handler";
 import { getSensorDeConjunto } from "../../controllers/SensorConjuntoController";
 import { getSensor } from "../../controllers/SensorController";
-import { criarMedicao } from "../../controllers/MedicaoController"
-import { Medicao } from "../../models/MedicaoModel"
 
 export const Tabela = (props) => {
-    const [result, setResult] = useState([]);
-    const { resultado, conjunto } = props;
+    const { resultado, conjunto, getData, getDataFalse, setResult, result } = props;
   
     useEffect(() => {
       if (resultado.length !== 0) {
@@ -31,9 +28,7 @@ export const Tabela = (props) => {
   
             Promise.all(promises).then(() => {
               if (ress.length > 0) {
-                setResult(ress);
-                const medicao = new Medicao(new Date(), ress)
-                criarMedicao(medicao)
+                setResult(ress);     
               }
             });
           });

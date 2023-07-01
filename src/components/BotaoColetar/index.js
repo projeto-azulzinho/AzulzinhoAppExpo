@@ -2,10 +2,13 @@ import React, {useState} from "react"
 import { Text, Pressable} from "react-native"
 import style from "./style"
 import { LinearGradient } from 'expo-linear-gradient';
+import { criarMedicao } from "../../controllers/MedicaoController"
+import { Medicao } from "../../models/MedicaoModel"
 
 export const BotaoColetar = props => {
     
-    const {funcao} = props
+    const {funcao, result} = props
+
 
     const iniciarColeta = async () => {
         async function fetchData() {
@@ -18,6 +21,12 @@ export const BotaoColetar = props => {
             }
           }
           fetchData();
+
+        if(result.length > 0) {
+            const medicao = new Medicao(new Date(), result)
+            criarMedicao(medicao)
+        }
+        console.log("aquiiiiiii")
     }
 
 
