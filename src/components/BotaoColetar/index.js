@@ -1,35 +1,36 @@
-import React, {useState} from "react"
-import { Text, Pressable} from "react-native"
-import style from "./style"
-import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState } from "react";
+import { Text, Pressable } from "react-native";
+import style from "./style";
+import { LinearGradient } from "expo-linear-gradient";
 
-export const BotaoColetar = props => {
-    
-    const {funcao} = props
+export const BotaoColetar = (props) => {
+  const { funcao, getDataTrue } = props;
 
-    const iniciarColeta = async () => {
-        async function fetchData() {
-            try {
-              const response = await fetch('http://192.168.1.10:3000/leitura');
-              const text = await response.text();
-              funcao(text);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          fetchData();
+  const iniciarColeta = async () => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://192.168.1.104:3000/leitura");
+        const text = await response.text();
+        funcao(text);
+      } catch (error) {
+        console.error(error);
+      }
     }
+    fetchData();
 
+    getDataTrue();
+  };
 
-    return (
-        <Pressable onPress={iniciarColeta}>
-            <LinearGradient style = {style.btnShape}
-                colors={['#184A5B','#5B5A1E']}
-                start={{ x: 0, y: 0}}
-                end={{x: 0.5, y: 0.5}}
-            >
-                <Text style = {style.btnText}> COLETAR DADOS </Text>              
-            </LinearGradient>
-        </Pressable>   
-    )
-}
+  return (
+    <Pressable onPress={iniciarColeta}>
+      <LinearGradient
+        style={style.btnShape}
+        colors={["#184A5B", "#5B5A1E"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.5, y: 0.5 }}
+      >
+        <Text style={style.btnText}> COLETAR DADOS </Text>
+      </LinearGradient>
+    </Pressable>
+  );
+};
