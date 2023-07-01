@@ -1,5 +1,4 @@
-export function Medicao(dataMedicao, valor, idSensor) {
+export function Medicao(dataMedicao, sensorValor) {
   this.dataMedicao = dataMedicao;
-  this.valor = valor;
-  this.idSensor = idSensor;
+  this.sensorValor = sensorValor;
 }

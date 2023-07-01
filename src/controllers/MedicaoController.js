@@ -12,11 +12,10 @@ import db from "../connection/firebaseConfig";
 const medicoesCol = collection(db, "Medicoes");
 
 export async function criarMedicao(medicao) {
-  const idSensorRef = doc(db, "Sensores", `${medicao.idSensor}`);
+  // const idSensorRef = doc(db, "Sensores", `${medicao.idSensor}`);
   return await addDoc(medicoesCol, {
     dataMedicao: medicao.dataMedicao,
-    valor: medicao.valor,
-    idSensor: idSensorRef,
+    sensorValor: medicao.sensorValor
   });
 }
 
