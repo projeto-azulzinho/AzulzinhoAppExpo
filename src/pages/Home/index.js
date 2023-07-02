@@ -65,7 +65,6 @@ export default function Home({ navigation }) {
       const listaNomeConjunto = res.map(conjunto => conjunto.nomeConjunto.stringValue);
       setListaNomeCojuntos(listaNomeConjunto);
       setListaCojuntos(res);
-      resultadoSensores('Sensor_Chuva|1024|Humidade|59.00|Temperatura|26.00|Pressão|97883.00|Altitude|290.85|TemperaturaBMP|29.20');
     });
     console.log(conjuntoSelecionado?.id);
   }, [conjuntoSelecionado]);
@@ -90,6 +89,17 @@ export default function Home({ navigation }) {
             console.log(conjuntoSelecionado);
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
+            async function fetchData() {
+              try {
+                const response = await fetch('http://192.168.1.10:3000/leitura');
+                const text = await response.text();
+                setResultadoColeta(text)
+              } catch (error) {
+                console.error(error);
+              }
+            }
+            fetchData();
+
             return selectedItem;
           }}
           rowTextForSelection={(item, index) => {

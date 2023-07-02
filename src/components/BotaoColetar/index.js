@@ -7,21 +7,10 @@ import { Medicao } from "../../models/MedicaoModel"
 
 export const BotaoColetar = props => {
     
-    const {funcao, result} = props
+    const {result} = props
 
 
     const iniciarColeta = async () => {
-        async function fetchData() {
-            try {
-              const response = await fetch('http://192.168.1.10:3000/leitura');
-              const text = await response.text();
-              funcao(text);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          fetchData();
-
         if(result.length > 0) {
             const medicao = new Medicao(new Date(), result)
             criarMedicao(medicao)
